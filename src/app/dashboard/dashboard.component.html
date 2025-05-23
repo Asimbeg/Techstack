@@ -1,0 +1,30 @@
+<div class="dashboard-container">
+  <header>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="Profile Picture">
+      <span>{{ user.firstname.charAt(0) + user.lastname.charAt(0) }}</span>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="user-card">
+      <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+      <p>Email: {{ user.email }}</p>
+      <button (click)="openPortfolio()">View Portfolio</button>
+    </div>
+  </main>
+
+  <kendo-dialog *ngIf="showPortfolio" (close)="showPortfolio = false">
+    <kendo-chart [categoryAxis]="{ categories: portfolioData.dates }">
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          [data]="portfolioData.values"
+          type="line"
+          name="Portfolio Value">
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </kendo-dialog>
+</div>
+
